@@ -24,7 +24,7 @@ export class Keys extends Model {
   userId: number;
 
   @Column({
-    allowNull: false,
+    allowNull: true,
     unique: true,
     type: DataType.TEXT,
   })

@@ -1,5 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { UserService } from './user.service';
+import { Request } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -21,5 +22,27 @@ export class UserController {
   async publicKey(@Param('email') email: string) {
     const key = await this.service.getPublicKey(email);
     return key;
+  }
+
+  @Post('/public-key/:email')
+  async setPublicKey(
+    @Param('email') email: string,
+    @Body('publicKey') publicKey: string,
+  ) {
+    try {
+      const success = await this.service.setPublicKey(email, publicKey);
+      return { success: success };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  @Post('ip')
+  async generateJwt(@Req() req: Request) {
+    const token = await this.service.generateJwtToken(
+      { ip: req.ip },
+      'JSDVLNSFDVNKDFVKNKJDSLCNSD',
+      '5m',
+    );
   }
 }

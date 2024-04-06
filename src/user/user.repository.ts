@@ -20,6 +20,7 @@ export class UserRepository {
       throw err;
     }
   }
+
   async getPrivateKeyFor(token) {
     try {
       const privateKey = await this.database.models.User.findOne({
@@ -35,6 +36,19 @@ export class UserRepository {
     } catch (err) {
       console.log(err);
       throw err;
+    }
+  }
+
+  async setPublicKey(id: number, publicKey: string) {
+    try {
+      const success = await this.database.models.Keys.create({
+        id,
+        publicKey,
+      });
+      if (success) return true;
+      else return false;
+    } catch (error) {
+      throw error;
     }
   }
 
