@@ -85,10 +85,8 @@ export class MailController {
         };
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
-            console.log(error);
             transporter.close();
           } else {
-            console.log('message sent successfully', info);
             transporter.close();
           }
         });
