@@ -101,6 +101,7 @@ export class MailService {
       const forwardDetails = await this.repo.getForwardableDetailsById(
         accessDetails.fid,
       );
+      const mailData = await this.repo.getMailById(forwardDetails.mid);
       if (forwardDetails.to === payload.fromAddress) {
         await this.repo.update(
           'Access',
@@ -114,6 +115,7 @@ export class MailService {
           { id: accessDetails.id },
         );
       }
+      return mailData;
     } catch (error) {
       throw error;
     }
