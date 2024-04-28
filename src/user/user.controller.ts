@@ -6,8 +6,16 @@ import { Request } from 'express';
 export class UserController {
   constructor(private service: UserService) {}
   @Post('/register')
-  async login(@Body() user: { email: string; password: string }) {
+  async register(
+    @Body() user: { email: string; password: string; passphrase: string },
+  ) {
     const key = await this.service.register(user);
+    return key;
+  }
+
+  @Post('/login')
+  async login(@Body() user: { email: string; password: string }) {
+    const key = await this.service.login(user);
     return key;
   }
 

@@ -26,7 +26,11 @@ export class UserRepository {
       const privateKey = await this.database.models.User.findOne({
         attributes: ['email'],
         include: [
-          { model: this.database.models.Keys, attributes: ['privateKey'] },
+          {
+            model: this.database.models.Keys,
+            attributes: ['privateKey'],
+            required: true,
+          },
         ],
         where: {
           token,

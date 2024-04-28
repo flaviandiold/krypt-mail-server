@@ -25,7 +25,6 @@ export class Keys extends Model {
 
   @Column({
     allowNull: true,
-    unique: true,
     type: DataType.TEXT,
   })
   @Exclude()

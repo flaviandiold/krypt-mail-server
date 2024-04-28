@@ -31,6 +31,11 @@ export class User extends Model {
   })
   token: string;
 
+  @Column({
+    allowNull: true,
+  })
+  passphrase: string;
+
   @HasOne(() => Keys, { foreignKey: 'userId' })
   key: Keys;
 }

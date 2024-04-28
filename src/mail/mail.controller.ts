@@ -12,7 +12,8 @@ export class MailController {
     try {
       const data = await this.service.get(messageId);
       if (data.forwardable) return data;
-      else return { forwardable: false };
+      else if (data.to.includes('kryptmail.com')) return data;
+      else return data;
     } catch (error) {
       console.log(error);
       return null;
